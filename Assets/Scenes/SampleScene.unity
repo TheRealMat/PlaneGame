@@ -421,6 +421,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a5bfbe3148447a4682573433358357c, type: 3}
+--- !u!1 &925863944 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2023821130708258253, guid: 5a5bfbe3148447a4682573433358357c,
+    type: 3}
+  m_PrefabInstance: {fileID: 9195237291717223710}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1145444333
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,6 +701,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85dfab9623c67784fa7894de63cd1604, type: 3}
+--- !u!1 &1572842179 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2023821130708258253, guid: 5a5bfbe3148447a4682573433358357c,
+    type: 3}
+  m_PrefabInstance: {fileID: 890994097}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1630201088
 GameObject:
   m_ObjectHideFlags: 0
@@ -725,6 +737,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theCamea: {fileID: 1687258584}
+  attachDistance: 0.2
+  editorObjects:
+  - {fileID: 925863944}
+  - {fileID: 1572842179}
 --- !u!4 &1630201090
 Transform:
   m_ObjectHideFlags: 0
@@ -1064,7 +1080,7 @@ PrefabInstance:
     - target: {fileID: 919300987101839727, guid: 5a5bfbe3148447a4682573433358357c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 2.13
       objectReference: {fileID: 0}
     - target: {fileID: 919300987101839727, guid: 5a5bfbe3148447a4682573433358357c,
         type: 3}

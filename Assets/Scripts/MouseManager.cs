@@ -14,6 +14,14 @@ public class MouseManager : MonoBehaviour
     private Vector3 screenPoint;
     private Vector3 offset;
 
+    [SerializeField]
+    private float attachDistance = 0;
+
+    public List<GameObject> editorObjects = new List<GameObject>()
+    {
+
+    };
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -57,7 +65,34 @@ public class MouseManager : MonoBehaviour
                 Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
                 heldObject.transform.position = curPosition;
 
+                CheckForAttach(heldObject);
+            }
+        }
+    }
 
+    // i'm not sure how this could be done better
+    public void CheckForAttach(GameObject currentObj)
+    {
+        foreach (GameObject obj in editorObjects)
+        {
+            if (obj != currentObj)
+            {
+                foreach (Vector3 point in obj.GetComponent<VehiclePart>().AttachPoints)
+                {
+                    foreach (Vector3 point2 in currentObj.GetComponent<VehiclePart>().AttachPoints)
+                    {
+                        if (Vector3.Distance(obj.transform.position + point, currentObj.transform.position + point2) < attachDistance)
+                        {
+                            // need to check that it isn't inside object
+                            // some sort of system to connect objects absed on what looks to be close from camera. maybe check in a cylinder from camera to attach things from further away. 
+                            // maybe get all points and select closest
+                            // also there needs to be an indication of where the snapping points are
+
+                            currentObj.transform.position = obj.transform.position + point -point2;
+                            return;
+                        }
+                    }
+                }
             }
         }
     }
