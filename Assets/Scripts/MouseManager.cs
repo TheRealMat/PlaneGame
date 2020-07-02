@@ -38,21 +38,13 @@ public class MouseManager : MonoBehaviour
                     if (Input.GetKey(KeyCode.LeftShift))
                     {
                         // should check for parent here
-                        GameObject objectCopy = Instantiate(hitInfo.collider.gameObject);
+                        GameObject objectCopy = Instantiate(hitInfo.collider.transform.root.gameObject);
                         editorObjects.Add(objectCopy);
                         heldObject = objectCopy;
                     }
                     else
                     {
-                        // need smart way to do this instead
-                        try
-                        {
-                            heldObject = hitInfo.collider.transform.parent.gameObject;
-                        }
-                        catch
-                        {
-                            heldObject = hitInfo.collider.transform.gameObject;
-                        }
+                        heldObject = hitInfo.collider.transform.root.gameObject;
                     }
 
                     screenPoint = Camera.main.WorldToScreenPoint(heldObject.transform.position);
@@ -97,11 +89,12 @@ public class MouseManager : MonoBehaviour
                             // need to check that it isn't inside object. all objects already have a collider, though maybe i will need to ignore colliders of snapped objects.
                             // needs to be a system to check if snapping points are occupied
                             // this does not support being snapped to multiple objects
-                            // i can maybe check rotation of other snapping point to prevent snapping to the inside of objects
                             // probably should have a system of accepting placement on click rather than assuming it's ok
+                            // ^ would also allow for canceling movement 
 
 
                             // prevents snapping on the inside of points. assumes rotation is consistent. this will probably break if i implement part rotation
+                            // yes, this system is crap. replace asap
                             if (point.transform.rotation == Quaternion.Inverse(point2.transform.rotation))
                             {
                                 // snap to place
