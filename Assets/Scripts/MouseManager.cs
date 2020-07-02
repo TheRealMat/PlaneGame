@@ -26,8 +26,6 @@ public class MouseManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            // create new object if shift is held
-
 
             if (heldObject == null)
             {
@@ -36,14 +34,25 @@ public class MouseManager : MonoBehaviour
                 // check if we are clicking on something
                 if (Physics.Raycast(ray, out hitInfo))
                 {
-                    // need smart way to do this instead
-                    try
+                    // copy object if sheft is held
+                    if (Input.GetKey(KeyCode.LeftShift))
                     {
-                        heldObject = hitInfo.collider.transform.parent.gameObject;
+                        // should check for parent here
+                        GameObject objectCopy = Instantiate(hitInfo.collider.gameObject);
+                        editorObjects.Add(objectCopy);
+                        heldObject = objectCopy;
                     }
-                    catch
+                    else
                     {
-                        heldObject = hitInfo.collider.transform.gameObject;
+                        // need smart way to do this instead
+                        try
+                        {
+                            heldObject = hitInfo.collider.transform.parent.gameObject;
+                        }
+                        catch
+                        {
+                            heldObject = hitInfo.collider.transform.gameObject;
+                        }
                     }
 
                     screenPoint = Camera.main.WorldToScreenPoint(heldObject.transform.position);
