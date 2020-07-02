@@ -83,14 +83,14 @@ public class MouseManager : MonoBehaviour
                 {
                     foreach (GameObject point2 in currentObj.GetComponent<VehiclePart>().AttachPoints)
                     {
-                        if (Vector3.Distance(obj.transform.position + point.transform.localPosition, currentObj.transform.position + point2.transform.localPosition) < attachDistance)
+                        if (Vector2.Distance(theCamea.WorldToScreenPoint(point.transform.position), theCamea.WorldToScreenPoint(point2.transform.position)) < attachDistance)
                         {
-                            // need to check that it isn't inside object
-                            // some sort of system to connect objects absed on what looks to be close from camera. maybe check in a cylinder from camera to attach things from further away. better system might be projecting to a 2d plane
-                            // maybe get all points and select closest
-                            // also there needs to be an indication of where the snapping points are
+                            
+
+                            // need to check that it isn't inside object. all objects already have a collider, though maybe i will need to ignore colliders of snapped objects.
                             // needs to be a system to check if snapping points are occupied
                             // this does not support being snapped to multiple objects
+                            // i can maybe check rotation of other snapping point to prevent snapping to the inside of objects
 
                             // snap to place
                             currentObj.transform.position = obj.transform.position + point.transform.localPosition -point2.transform.localPosition;
