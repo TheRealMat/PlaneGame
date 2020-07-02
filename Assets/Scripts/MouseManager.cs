@@ -85,20 +85,23 @@ public class MouseManager : MonoBehaviour
                     {
                         if (Vector2.Distance(theCamea.WorldToScreenPoint(point.transform.position), theCamea.WorldToScreenPoint(point2.transform.position)) < attachDistance)
                         {
-                            
-
                             // need to check that it isn't inside object. all objects already have a collider, though maybe i will need to ignore colliders of snapped objects.
                             // needs to be a system to check if snapping points are occupied
                             // this does not support being snapped to multiple objects
-                            // i can maybe check rotation of other snapping point to prevent snapping to the inside of objects
 
-                            // snap to place
-                            currentObj.transform.position = obj.transform.position + point.transform.localPosition -point2.transform.localPosition;
 
-                            //getting component should be done somewhere else
-                            point.GetComponent<AttachPoint>().attachedTo = point2;
-                            point2.GetComponent<AttachPoint>().attachedTo = point;
-                            return;
+                            // prevents snapping on the inside of objects. assumes rotation is set up consistently 
+                            if (point.transform.rotation == Quaternion.Inverse(point2.transform.rotation))
+                            {
+                                // snap to place
+                                currentObj.transform.position = obj.transform.position + point.transform.localPosition - point2.transform.localPosition;
+
+                                //getting component should be done somewhere else
+                                point.GetComponent<AttachPoint>().attachedTo = point2;
+                                point2.GetComponent<AttachPoint>().attachedTo = point;
+                                return;
+                            }
+
                         }
                         point.GetComponent<AttachPoint>().attachedTo = null;
                         point2.GetComponent<AttachPoint>().attachedTo = null;
