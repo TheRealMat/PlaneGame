@@ -50,6 +50,8 @@ public class MouseManager : MonoBehaviour
                     offset = heldObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
                 }
             }
+
+            // put down object again
             else if (heldObject != null)
             {
                 heldObject = null;
@@ -88,10 +90,18 @@ public class MouseManager : MonoBehaviour
                             // maybe get all points and select closest
                             // also there needs to be an indication of where the snapping points are
                             // needs to be a system to check if snapping points are occupied
+                            // this does not support being snapped to multiple objects
 
+                            // snap to place
                             currentObj.transform.position = obj.transform.position + point.transform.localPosition -point2.transform.localPosition;
+
+                            //getting component should be done somewhere else
+                            point.GetComponent<AttachPoint>().attachedTo = point2;
+                            point2.GetComponent<AttachPoint>().attachedTo = point;
                             return;
                         }
+                        point.GetComponent<AttachPoint>().attachedTo = null;
+                        point2.GetComponent<AttachPoint>().attachedTo = null;
                     }
                 }
             }
