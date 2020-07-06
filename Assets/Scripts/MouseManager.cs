@@ -22,6 +22,10 @@ public class MouseManager : MonoBehaviour
 
     };
 
+
+    Color heldColor = new Color(0.8f, 0.8f, 1.0f, 0.7f);
+    Color normalColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -45,6 +49,7 @@ public class MouseManager : MonoBehaviour
                     else
                     {
                         heldObject = hitInfo.collider.transform.root.gameObject;
+                        heldObject.GetComponent<Renderer>().material.color = heldColor;
                     }
 
                     screenPoint = Camera.main.WorldToScreenPoint(heldObject.transform.position);
@@ -55,6 +60,7 @@ public class MouseManager : MonoBehaviour
             // put down object again
             else if (heldObject != null)
             {
+                heldObject.GetComponent<Renderer>().material.color = normalColor;
                 heldObject = null;
             }
         }
