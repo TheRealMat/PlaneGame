@@ -6,14 +6,21 @@ public class AttachPoint : MonoBehaviour
 {
     // need some way of defining attach direction 
 
-    [SerializeField]
-    ParticleSystem particle = null;
+    public GameObject particle = null;
 
-    public GameObject attachedTo = null;
+    private GameObject attachedTo = null;
+    public GameObject AttachedTo{ get { return attachedTo; } set { attachedTo = value; UpdateParticle(); }}
 
-    public void ToggleParticles()
+
+    private void UpdateParticle()
     {
-        particle.gameObject.SetActive(!particle.gameObject.activeSelf);
+        if (attachedTo == null)
+        {
+            particle.SetActive(true);
+        }
+        else
+        {
+            particle.SetActive(false);
+        }
     }
-
 }

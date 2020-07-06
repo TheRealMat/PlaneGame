@@ -126,14 +126,14 @@ public class MouseManager : MonoBehaviour
                                 currentObj.transform.position = obj.transform.position + point.transform.localPosition - point2.transform.localPosition;
 
                                 //getting component should be done somewhere else
-                                point.GetComponent<AttachPoint>().attachedTo = point2;
-                                point2.GetComponent<AttachPoint>().attachedTo = point;
+                                point.GetComponent<AttachPoint>().AttachedTo = point2;
+                                point2.GetComponent<AttachPoint>().AttachedTo = point;
                                 return;
                             }
 
                         }
-                        point.GetComponent<AttachPoint>().attachedTo = null;
-                        point2.GetComponent<AttachPoint>().attachedTo = null;
+                        point.GetComponent<AttachPoint>().AttachedTo = null;
+                        point2.GetComponent<AttachPoint>().AttachedTo = null;
                     }
                 }
             }
