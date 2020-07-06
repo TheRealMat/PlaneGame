@@ -24,13 +24,14 @@ public class MouseManager : MonoBehaviour
 
 
     Color heldColor = new Color(0.8f, 0.8f, 1.0f, 0.7f);
+
+    // this will need to be changed if glass parts are added
     Color normalColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-
             if (heldObject == null)
             {
                 Ray ray = theCamea.ScreenPointToRay(Input.mousePosition);
@@ -41,15 +42,11 @@ public class MouseManager : MonoBehaviour
                     // copy object if sheft is held
                     if (Input.GetKey(KeyCode.LeftShift))
                     {
-                        // should check for parent here
-                        GameObject objectCopy = Instantiate(hitInfo.collider.transform.root.gameObject);
-                        editorObjects.Add(objectCopy);
-                        heldObject = objectCopy;
+                        CopyObject(hitInfo.collider.transform.root.gameObject);
                     }
                     else
                     {
-                        heldObject = hitInfo.collider.transform.root.gameObject;
-                        heldObject.GetComponent<Renderer>().material.color = heldColor;
+                        HoldObject(hitInfo.collider.transform.root.gameObject);
                     }
 
                     screenPoint = Camera.main.WorldToScreenPoint(heldObject.transform.position);
@@ -60,8 +57,7 @@ public class MouseManager : MonoBehaviour
             // put down object again
             else if (heldObject != null)
             {
-                heldObject.GetComponent<Renderer>().material.color = normalColor;
-                heldObject = null;
+                PutDown();
             }
         }
 
@@ -69,14 +65,37 @@ public class MouseManager : MonoBehaviour
         {
             if (heldObject != null)
             {
-                Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-
-                Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-                heldObject.transform.position = curPosition;
-
-                CheckForAttach(heldObject);
+                MovingObject();
             }
         }
+    }
+
+    private void MovingObject()
+    {
+        Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+
+        Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
+        heldObject.transform.position = curPosition;
+
+        CheckForAttach(heldObject);
+    }
+
+    private void CopyObject(GameObject obj)
+    {
+        GameObject objectCopy = Instantiate(obj);
+        editorObjects.Add(objectCopy);
+        HoldObject(objectCopy);
+    }
+    private void HoldObject(GameObject obj)
+    {
+        heldObject = obj;
+        // this requires the material to be set to transparent
+        heldObject.GetComponent<Renderer>().material.color = heldColor;
+    }
+    private void PutDown()
+    {
+        heldObject.GetComponent<Renderer>().material.color = normalColor;
+        heldObject = null;
     }
 
     // i'm not sure how this could be done better
