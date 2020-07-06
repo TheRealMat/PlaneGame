@@ -5,7 +5,7 @@ using UnityEngine;
 public class MouseManager : MonoBehaviour
 {
     [SerializeField]
-    private Camera theCamea = null;
+    private Camera theCamera = null;
 
     private GameObject heldObject = null;
 
@@ -34,7 +34,7 @@ public class MouseManager : MonoBehaviour
         {
             if (heldObject == null)
             {
-                Ray ray = theCamea.ScreenPointToRay(Input.mousePosition);
+                Ray ray = theCamera.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hitInfo;
                 // check if we are clicking on something
                 if (Physics.Raycast(ray, out hitInfo))
@@ -98,6 +98,12 @@ public class MouseManager : MonoBehaviour
         heldObject = null;
     }
 
+
+    private float GetScreenDistance(Vector3 point1, Vector3 point2, Camera camera)
+    {
+        return Vector2.Distance(camera.WorldToScreenPoint(point1), camera.WorldToScreenPoint(point2));
+    }
+
     // i'm not sure how this could be done better
     public void CheckForAttach(GameObject currentObj)
     {
@@ -109,7 +115,7 @@ public class MouseManager : MonoBehaviour
                 {
                     foreach (GameObject point2 in currentObj.GetComponent<VehiclePart>().AttachPoints)
                     {
-                        if (Vector2.Distance(theCamea.WorldToScreenPoint(point.transform.position), theCamea.WorldToScreenPoint(point2.transform.position)) < attachDistance)
+                        if (GetScreenDistance(point.transform.position, point2.transform.position, theCamera) < attachDistance)
                         {
                             // need to check that it isn't inside object. all objects already have a collider, though maybe i will need to ignore colliders of snapped objects.
                             // needs to be a system to check if snapping points are occupied

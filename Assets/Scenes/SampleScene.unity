@@ -644,7 +644,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 1155640542}
-  attachedTo: {fileID: 0}
 --- !u!4 &549231252
 Transform:
   m_ObjectHideFlags: 0
@@ -853,7 +852,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 878643522}
-  attachedTo: {fileID: 0}
 --- !u!4 &714120343
 Transform:
   m_ObjectHideFlags: 0
@@ -1000,7 +998,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 788051816}
-  attachedTo: {fileID: 0}
 --- !u!4 &782203919
 Transform:
   m_ObjectHideFlags: 0
@@ -1321,7 +1318,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 1918524996}
-  attachedTo: {fileID: 0}
 --- !u!4 &995486063
 Transform:
   m_ObjectHideFlags: 0
@@ -1552,7 +1548,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 1871055648}
-  attachedTo: {fileID: 0}
 --- !u!1 &1145444333
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,7 +1726,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 2096097204}
-  attachedTo: {fileID: 0}
 --- !u!4 &1196972996
 Transform:
   m_ObjectHideFlags: 0
@@ -1777,7 +1771,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 550292768}
-  attachedTo: {fileID: 0}
 --- !u!4 &1246887823
 Transform:
   m_ObjectHideFlags: 0
@@ -1829,7 +1822,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 531242541}
-  attachedTo: {fileID: 0}
 --- !u!4 &1349479764
 Transform:
   m_ObjectHideFlags: 0
@@ -2192,7 +2184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 1648973601}
-  attachedTo: {fileID: 0}
 --- !u!1 &1630201088
 GameObject:
   m_ObjectHideFlags: 0
@@ -2222,7 +2213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e1f1a5367be3b247abdac81842d5c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  theCamea: {fileID: 1687258584}
+  theCamera: {fileID: 1687258584}
   attachDistance: 25
   editorObjects:
   - {fileID: 925863944}
@@ -2437,7 +2428,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 1996443159}
-  attachedTo: {fileID: 0}
 --- !u!4 &1814092234
 Transform:
   m_ObjectHideFlags: 0
@@ -2483,7 +2473,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 309984152}
-  attachedTo: {fileID: 0}
 --- !u!4 &1843049195
 Transform:
   m_ObjectHideFlags: 0
@@ -2683,7 +2672,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 2093544573}
-  attachedTo: {fileID: 0}
 --- !u!4 &1994511758
 Transform:
   m_ObjectHideFlags: 0
