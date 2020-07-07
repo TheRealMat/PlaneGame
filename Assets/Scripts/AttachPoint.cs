@@ -8,7 +8,7 @@ public class AttachPoint : MonoBehaviour
 
     public GameObject particle = null;
 
-    private GameObject attachedTo = null;
+    public GameObject attachedTo = null;
     public GameObject AttachedTo{ get { return attachedTo; } set { attachedTo = value; UpdateParticle(); }}
 
 

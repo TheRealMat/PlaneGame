@@ -166,16 +166,23 @@ public class MouseManager : MonoBehaviour
                         if (GetScreenDistance(point.transform.position, point2.transform.position, theCamera) < attachDistance)
                         {
                             // need to check that it isn't inside object. all objects already have a collider, though maybe i will need to ignore colliders of snapped objects.
-                            // needs to be a system to check if snapping points are occupied
                             // probably should have a system of accepting placement on click rather than assuming it's ok
                             // ^ would also allow for canceling movement 
 
 
-                            // prevents snapping on the inside of points. assumes rotation is consistent. this will probably break if i implement part rotation
-                            // yes, this system is crap. replace asap
-                            if (point.transform.rotation == Quaternion.Inverse(point2.transform.rotation))
+
+                            // touch this code at your own peril
+
+                            bool canAttatch = false;
+
+                            // rotation detection is crap. replace asap
+                            if (point.GetComponent<AttachPoint>().AttachedTo == null && point2.transform.rotation == Quaternion.Inverse(point.transform.rotation))
                             {
-                                // snap to place
+                                canAttatch = true;
+                            }
+
+                            if (point2.GetComponent<AttachPoint>().AttachedTo == point || canAttatch)
+                            {
                                 currentObj.transform.position = obj.transform.position + point.transform.localPosition - point2.transform.localPosition;
                             }
 
