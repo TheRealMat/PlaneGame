@@ -17,11 +17,9 @@ public class MouseManager : MonoBehaviour
     [SerializeField]
     private float attachDistance = 0;
 
-    public List<GameObject> editorObjects = new List<GameObject>()
-    {
+    public List<GameObject> editorObjects = new List<GameObject>();
 
-    };
-
+    private List<GameObject> attachPointsList = new List<GameObject>();
 
     Color heldColor = new Color(0.8f, 0.8f, 1.0f, 0.7f);
 
@@ -78,6 +76,8 @@ public class MouseManager : MonoBehaviour
         heldObject.transform.position = curPosition;
 
         CheckForAttach(heldObject);
+        GeneratePointsList();
+        AttachAllPoints();
     }
 
     private void CopyObject(GameObject obj)
@@ -104,6 +104,54 @@ public class MouseManager : MonoBehaviour
         return Vector2.Distance(camera.WorldToScreenPoint(point1), camera.WorldToScreenPoint(point2));
     }
 
+    // i probably shouldn't generate entire list every time
+    private void GeneratePointsList()
+    {
+        // generate list of all attachment points
+        attachPointsList.Clear();
+        // add all points to list
+        foreach (GameObject obj in editorObjects)
+        {
+            foreach (GameObject point in obj.GetComponent<VehiclePart>().AttachPoints)
+            {
+                attachPointsList.Add(point);
+            }
+        }
+    }
+
+    private void AttachAllPoints()
+    {
+        // attach objects together
+        foreach (GameObject point in attachPointsList)
+        {
+            AttachPoint attachPoint = point.GetComponent<AttachPoint>();
+            foreach (GameObject otherPoint in attachPointsList)
+            {
+                AttachPoint OtherAttachPoint = otherPoint.GetComponent<AttachPoint>();
+                // see if other point exists at same location
+                if (otherPoint != point && point.transform.position == otherPoint.transform.position)
+                {
+                    attachPoint.AttachedTo = otherPoint;
+                    OtherAttachPoint.AttachedTo = point;
+                }
+
+                // remove attachment if points do not exist at same location
+                if (attachPoint.AttachedTo != null)
+                {
+                    if(attachPoint.AttachedTo.transform.position != point.transform.position)
+                    {
+                        attachPoint.AttachedTo = null;
+                        OtherAttachPoint.AttachedTo = null;
+                    }
+                }
+            }
+        }
+
+    }
+
+
+
+
     // i'm not sure how this could be done better
     public void CheckForAttach(GameObject currentObj)
     {
@@ -119,7 +167,6 @@ public class MouseManager : MonoBehaviour
                         {
                             // need to check that it isn't inside object. all objects already have a collider, though maybe i will need to ignore colliders of snapped objects.
                             // needs to be a system to check if snapping points are occupied
-                            // this does not support being snapped to multiple objects
                             // probably should have a system of accepting placement on click rather than assuming it's ok
                             // ^ would also allow for canceling movement 
 
@@ -130,16 +177,9 @@ public class MouseManager : MonoBehaviour
                             {
                                 // snap to place
                                 currentObj.transform.position = obj.transform.position + point.transform.localPosition - point2.transform.localPosition;
-
-                                //getting component should be done somewhere else
-                                point.GetComponent<AttachPoint>().AttachedTo = point2;
-                                point2.GetComponent<AttachPoint>().AttachedTo = point;
-                                return;
                             }
 
                         }
-                        point.GetComponent<AttachPoint>().AttachedTo = null;
-                        point2.GetComponent<AttachPoint>().AttachedTo = null;
                     }
                 }
             }
