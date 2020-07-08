@@ -175,8 +175,8 @@ public class MouseManager : MonoBehaviour
 
                             bool canAttatch = false;
 
-                            // rotation detection is crap. replace asap
-                            if (point.GetComponent<AttachPoint>().AttachedTo == null && point2.transform.rotation == Quaternion.Inverse(point.transform.rotation))
+                            // dot is supposed to return -1 but doesn't. go yell at unity
+                            if (point.GetComponent<AttachPoint>().AttachedTo == null && Vector3.Dot(point.transform.forward, point2.transform.forward) < 0)
                             {
                                 canAttatch = true;
                             }
