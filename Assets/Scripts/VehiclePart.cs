@@ -8,4 +8,15 @@ public class VehiclePart : MonoBehaviour
     {
 
     };
+
+    private void Start()
+    {
+        foreach(Transform child in transform)
+        {
+            if (child.gameObject.TryGetComponent<AttachPoint>(out AttachPoint ap))
+            {
+                AttachPoints.Add(child.gameObject);
+            } 
+        }
+    }
 }
