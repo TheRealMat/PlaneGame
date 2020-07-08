@@ -17,7 +17,7 @@ public class MouseManager : MonoBehaviour
     [SerializeField]
     private float attachDistance = 0;
 
-    public List<GameObject> editorObjects = new List<GameObject>();
+    private List<GameObject> editorObjects = new List<GameObject>();
 
     private List<GameObject> attachPointsList = new List<GameObject>();
 
@@ -25,6 +25,16 @@ public class MouseManager : MonoBehaviour
 
     // this will need to be changed if glass parts are added
     Color normalColor = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+    private void Start()
+    {
+        foreach (VehiclePart vp in FindObjectsOfType<VehiclePart>())
+        {
+            editorObjects.Add(vp.gameObject);
+        }
+        
+
+    }
 
     void Update()
     {

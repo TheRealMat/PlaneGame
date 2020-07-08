@@ -270,12 +270,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 296138508}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &327834682 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5382179106886331778, guid: e68b0e705c50fba4695e7f5801bd46d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 973622600}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &545807336
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -834,12 +828,6 @@ LightProbeGroup:
   - {x: -0.8738291, y: 0.51661086, z: 2.5225298}
   - {x: -1.3810283, y: 0.51661086, z: 2.9244456}
   m_Dering: 0
---- !u!1 &1522589816 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5382179106886331778, guid: e68b0e705c50fba4695e7f5801bd46d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 545807336}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1556901916
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -917,9 +905,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theCamera: {fileID: 1687258584}
   attachDistance: 25
-  editorObjects:
-  - {fileID: 327834682}
-  - {fileID: 1522589816}
 --- !u!4 &1630201090
 Transform:
   m_ObjectHideFlags: 0
